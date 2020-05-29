@@ -1,17 +1,16 @@
 import { LitElement } from 'lit-element';
 import { html } from 'lit-html';
+import './add-item';
 
 export class AppPolymer extends LitElement {
 	constructor() {
 		super();
-		this.popupOpen = false;
-		this.allContacts = [];
+		this.todoList = [];
 	}
 
 	static get properties() {
 		return {
-			popupOpen: { type: Boolean },
-			allContacts: { type: Array }
+			todoList: { type: Array }
 		};
 	}
 
@@ -24,7 +23,8 @@ export class AppPolymer extends LitElement {
 					grid-template-columns: 250px 1fr;
 				}
 			</style>
-			<div class="main-page"></div>
+			<div class="main-page">Hello Todo App</div>
+			<add-item></add-item>
 		`;
 	}
 }

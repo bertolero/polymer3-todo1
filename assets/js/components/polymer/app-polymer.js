@@ -1,7 +1,7 @@
 import { LitElement } from 'lit-element';
 import { html } from 'lit-html';
 
-export class MyElement extends LitElement {
+export class AppPolymer extends LitElement {
 	constructor() {
 		super();
 		this.popupOpen = false;
@@ -29,4 +29,4 @@ export class MyElement extends LitElement {
 	}
 }
 
-customElements.define('my-element', MyElement);
+customElements.define('app-polymer', AppPolymer);

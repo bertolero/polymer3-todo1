@@ -47,14 +47,6 @@ export class AppPolymer extends LitElement {
 
 	render() {
 		return html`
-			<style>
-				@import '/css/global.css';
-				.main-page {
-					display: grid;
-					grid-template-columns: 250px 1fr;
-				}
-			</style>
-			<div class="main-page">Hello Todo App</div>
 			<add-item></add-item>
 			<list-items .todoList="${this.todoList}"></list-items>
 		`;

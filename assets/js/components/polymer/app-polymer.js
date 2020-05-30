@@ -8,12 +8,17 @@ export class AppPolymer extends LitElement {
 		super();
 		let storedTodoList = JSON.parse(localStorage.getItem('todo-list'));
 		this.todoList = storedTodoList === null ? [] : storedTodoList;
+		this.addEventListener('on-add-todo-item', this.onAddTodoItem);
 	}
 
 	static get properties() {
 		return {
 			todoList: { type: Array }
 		};
+	}
+
+	onAddTodoItem(event) {
+		this.todoList = event.detail.todoList;
 	}
 
 	render() {

@@ -9,6 +9,7 @@ export class AppPolymer extends LitElement {
 		let storedTodoList = JSON.parse(localStorage.getItem('todo-list'));
 		this.todoList = storedTodoList === null ? [] : storedTodoList;
 		this.addEventListener('on-add-todo-item', this.onAddTodoItem);
+		this.addEventListener('on-delete-todo-item', this.onDeleteTodoItem);
 	}
 
 	static get properties() {
@@ -19,6 +20,19 @@ export class AppPolymer extends LitElement {
 
 	onAddTodoItem(event) {
 		this.todoList = event.detail.todoList;
+	}
+
+	onDeleteTodoItem(event) {
+		const todoItemIndex = this.todoList
+			.map((item) => item.id)
+			.indexOf(event.detail.id);
+
+		function immutableDelete(arr, index) {
+			return arr.slice(0, index).concat(arr.slice(index + 1));
+		}
+
+		this.todoList = immutableDelete(this.todoList, todoItemIndex);
+		localStorage.setItem('todo-list', JSON.stringify(this.todoList));
 	}
 
 	render() {

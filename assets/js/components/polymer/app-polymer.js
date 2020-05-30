@@ -10,6 +10,7 @@ export class AppPolymer extends LitElement {
 		this.todoList = storedTodoList === null ? [] : storedTodoList;
 		this.addEventListener('on-add-todo-item', this.onAddTodoItem);
 		this.addEventListener('on-delete-todo-item', this.onDeleteTodoItem);
+		this.addEventListener('on-change-todo-item', this.onChangeTodoItem);
 	}
 
 	static get properties() {
@@ -32,6 +33,15 @@ export class AppPolymer extends LitElement {
 		}
 
 		this.todoList = immutableDelete(this.todoList, todoItemIndex);
+		localStorage.setItem('todo-list', JSON.stringify(this.todoList));
+	}
+
+	onChangeTodoItem(event) {
+		const todoItemIndex = this.todoList
+			.map((item) => item.id)
+			.indexOf(event.detail.id);
+
+		this.todoList[todoItemIndex].done = !this.todoList[todoItemIndex].done;
 		localStorage.setItem('todo-list', JSON.stringify(this.todoList));
 	}
 

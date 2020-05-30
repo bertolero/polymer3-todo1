@@ -1,5 +1,6 @@
 import { LitElement } from 'lit-element';
 import { html } from 'lit-html';
+import './todo-item';
 
 export class ListItems extends LitElement {
 	constructor() {
@@ -15,7 +16,7 @@ export class ListItems extends LitElement {
 
 	printTodoItems() {
 		return this.todoList.map((todo) => {
-			return html` <li>${todo.value}</li> `;
+			return html`<todo-item .item="${todo}"></todo-item>`;
 		});
 	}
 

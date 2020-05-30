@@ -21,13 +21,11 @@ export class AddItem extends LitElement {
 			storedTodoList = storedTodoList === null ? [] : storedTodoList;
 			console.debug(storedTodoList);
 
-			const todoList = [
-				{
-					id: new Date().valueOf(),
-					value: this.todoItem,
-					done: false
-				}
-			];
+			const todoList = {
+				id: new Date().valueOf(),
+				value: this.todoItem,
+				done: false
+			};
 			storedTodoList.push(todoList);
 			localStorage.setItem('todo-list', JSON.stringify(storedTodoList));
 			const todoInput = this.shadowRoot.querySelectorAll('input');

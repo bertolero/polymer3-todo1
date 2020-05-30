@@ -31,7 +31,19 @@ export class AddItem extends LitElement {
 			const todoInput = this.shadowRoot.querySelectorAll('input');
 			todoInput[0].value = '';
 			this.todoItem = '';
+			this.triggerAddTodoItemEvent(storedTodoList);
 		}
+	}
+
+	triggerAddTodoItemEvent(storedTodoList) {
+		const addTodoItemEvent = new CustomEvent('on-add-todo-item', {
+			detail: { todoList: storedTodoList },
+			bubbles: true,
+			composed: true
+		});
+		console.debug('add-todo-item trigger on-add-todo-item');
+		console.debug(addTodoItemEvent);
+		this.dispatchEvent(addTodoItemEvent);
 	}
 
 	static get properties() {

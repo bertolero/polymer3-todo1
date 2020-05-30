@@ -14,8 +14,6 @@ export class TodoItem extends LitElement {
 	}
 
 	onDeleteTodoItem(id) {
-		console.debug(id);
-
 		const onDeleteTodoItem = new CustomEvent('on-delete-todo-item', {
 			detail: { id: id },
 			bubbles: true,
@@ -26,12 +24,31 @@ export class TodoItem extends LitElement {
 		this.dispatchEvent(onDeleteTodoItem);
 	}
 
+	onChangeTodoItem(id) {
+		const onChangedTodoItem = new CustomEvent('on-change-todo-item', {
+			detail: { id: id },
+			bubbles: true,
+			composed: true
+		});
+		console.debug('todo item trigger on-change-todo-item event');
+		console.debug(onChangedTodoItem);
+		this.dispatchEvent(onChangedTodoItem);
+		this.requestUpdate();
+	}
+
 	render() {
 		return html`
-			<li>${this.item.value}</li>
-			<button
-				@click="${this.onDeleteTodoItem.bind(this, this.item.id)}"
-			></button>
+			<li>
+				<input
+					type="checkbox"
+					.checked="${this.item.done}"
+					@click="${this.onChangeTodoItem.bind(this, this.item.id)}"
+				/>
+				${this.item.value}
+				<button
+					@click="${this.onDeleteTodoItem.bind(this, this.item.id)}"
+				></button>
+			</li>
 		`;
 	}
 }
